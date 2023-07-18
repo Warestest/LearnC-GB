@@ -10,7 +10,7 @@
 9 5 3 2
 8 4 4 2
 */
-/*
+
 void printMatrix(int[,] matrix){
 for (int i = 0; i < matrix.GetLength(0); i++)
 {
@@ -52,7 +52,7 @@ Console.WriteLine();
 sortToMin(matrix);
 Console.WriteLine("Отсортированный массив");
 printMatrix(matrix);
-*/
+
 /*
 Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
 
@@ -133,4 +133,75 @@ sumRowMatrix(matrix);
 15 18
 */
 
+void printMatrix(int[,] matrix){
+for (int i = 0; i < matrix.GetLength(0); i++)
+{
+ for (int j = 0; j < matrix.GetLength(1); j++)
+ {
+ Console.Write($"{matrix[i, j]} ");
+ }
+Console.WriteLine();
+}
+}
 
+int[,] Firstmatrix = new int[,]{
+{2, 4}, 
+{3, 2}
+};
+int[,] Secondmatrix = new int[,]{
+{3, 4},
+{3, 3}
+};
+
+
+
+
+int[,] FillArrayRandom(int[,] array)
+{
+  for (int i = 0; i < array.GetLength(0); i++)
+  {
+    for (int j = 0; j < array.GetLength(1); j++)
+    {
+      array[i, j] = new Random().Next(1, 10);
+    }
+  }
+  return array;
+}
+
+int[,] MultiplyMatrix(int[,] Firstmatrix, int[,] Secondmatrix)
+{
+  int newRow, newCol;
+  if (Firstmatrix.GetLength(0) > Secondmatrix.GetLength(0))
+  {
+    newRow = Secondmatrix.GetLength(0);
+  }
+  else
+  {
+    newRow = Firstmatrix.GetLength(0);
+  }
+  if (Firstmatrix.GetLength(1) > Secondmatrix.GetLength(1))
+  {
+    newCol = Secondmatrix.GetLength(1);
+  }
+  else
+  {
+    newCol = Firstmatrix.GetLength(1);
+  }
+
+  int[,] resultMatrix = new int[newRow, newCol];
+
+  for (int i = 0; i < newRow; i++)
+  {
+    for (int j = 0; j < newCol; j++)
+    {
+      for (int e = 0; e < newRow; e++)
+      {
+        resultMatrix[i, j] += Firstmatrix[i, e] * Secondmatrix[e, j];
+      }
+    }
+  }
+  return resultMatrix;
+}
+int[,] resultMatrix = MultiplyMatrix(Firstmatrix, Secondmatrix);
+
+printMatrix(resultMatrix);
